@@ -1,4 +1,6 @@
-let moment = require('moment');
+const moment = require('moment');
+// const { addDays, parseISO } = require('date-fns');
+const { addDays, parseISO } = require('date-fns');
 /** 
   An event could look like this:
   ```
@@ -98,7 +100,7 @@ const groupEventsByDay = (events) => {
     return allEvents;
   }, {});
 
-  // Mapping through the key values and remove the difference key value
+  // Mapping through the key values and remove the difference key value from the event
   Object.keys(events).map((key) => {
     events[key] = events[key].map((event) => {
       return {
@@ -112,7 +114,7 @@ const groupEventsByDay = (events) => {
   return events;
 };
 
-groupEventsByDay(arrayOfEvents);
+// groupEventsByDay(arrayOfEvents);
 /** 
   Adjust the start and end date of an event so it maintains its total duration, but is moved `toDay`.
   `eventsByDay` should be the same as the return value of `groupEventsByDay`
@@ -148,6 +150,43 @@ groupEventsByDay(arrayOfEvents);
 
   Your solution should not modify any of the function arguments
 */
+
 const moveEventToDay = (eventsByDay, id, toDay) => {
+  Object.keys(eventsByDay).map((key) => {
+    let eventsFromKeys = eventsByDay[key];
+
+    const targetedEvent = eventsFromKeys.filter((event) => event.id === id);
+
+    let firstEvent = eventsByDay[0];
+
+    if (firstEvent.length > 0) {
+      firstEvent = firstEvent[firstEvent.length - 1];
+    } else {
+      firstEvent = firstEvent[0];
+    }
+
+    // Find dates of the first event
+    const targetedEventUpdated = targetedEvent.map((event) => {
+      const eventStartsAt = JSON.stringify(
+        addDays(parseISO(firstEvent.startsAt), toDay),
+      );
+      const eventEndsAt = JSON.stringify(
+        addDays(parseISO(firstEvent.endsAt), toDay),
+      );
+      return {
+        ...event,
+        startsAt: eventStartsAt.replace(/[ "]/g, ''),
+        endsAt: eventEndsAt.replace(/[ "]/g, ''),
+      };
+    });
+
+    if (eventsByDay[toDay]) {
+      eventsByDay[toDay] = [...eventsByDay[toDay], targetedEventUpdated[0]];
+    } else {
+      eventsByDay[toDay] = [targetedEventUpdated[0]];
+    }
+  });
   return eventsByDay;
 };
+
+moveEventToDay(groupEventsByDay(arrayOfEvents), 110, 9);
