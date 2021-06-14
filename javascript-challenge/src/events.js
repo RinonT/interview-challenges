@@ -1,5 +1,4 @@
 const moment = require('moment');
-// const { addDays, parseISO } = require('date-fns');
 const { addDays, parseISO } = require('date-fns');
 /** 
   An event could look like this:
@@ -151,10 +150,6 @@ const groupEventsByDay = (events) => {
   Your solution should not modify any of the function arguments
 */
 
-const removeUndefinedEvent = (eventsArr) => {
-  return eventsArr.filter((event) => event !== undefined);
-};
-
 const moveEventToDay = (eventsByDay, id, toDay) => {
   if (
     typeof eventsByDay === 'object' &&
@@ -197,6 +192,10 @@ const moveEventToDay = (eventsByDay, id, toDay) => {
       eventsByDay[key] = [...eventsWithoutTheTargetedOne];
 
       if (eventsByDay[toDay]) {
+        const removeUndefinedEvent = (eventsArr) => {
+          return eventsArr.filter((event) => event !== undefined);
+        };
+
         const eventMovedToDay = removeUndefinedEvent(eventsByDay[toDay]);
 
         if (eventMovedToDay !== []) {
