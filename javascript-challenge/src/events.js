@@ -151,42 +151,72 @@ const groupEventsByDay = (events) => {
   Your solution should not modify any of the function arguments
 */
 
+const removeUndefinedEvent = (eventsArr) => {
+  return eventsArr.filter((event) => event !== undefined);
+};
+
 const moveEventToDay = (eventsByDay, id, toDay) => {
-  Object.keys(eventsByDay).map((key) => {
-    let eventsFromKeys = eventsByDay[key];
+  if (
+    typeof eventsByDay === 'object' &&
+    typeof id === 'number' &&
+    typeof toDay === 'number'
+  ) {
+    Object.keys(eventsByDay).map((key) => {
+      let eventsFromKeys = eventsByDay[key];
 
-    const targetedEvent = eventsFromKeys.filter((event) => event.id === id);
+      const targetedEvent = eventsFromKeys.filter((event) => event.id === id);
 
-    let firstEvent = eventsByDay[0];
+      let firstEvent = eventsByDay[0];
+      if (firstEvent.length > 0) {
+        firstEvent = firstEvent[firstEvent.length - 1];
+      } else {
+        firstEvent = firstEvent[0];
+      }
 
-    if (firstEvent.length > 0) {
-      firstEvent = firstEvent[firstEvent.length - 1];
-    } else {
-      firstEvent = firstEvent[0];
-    }
+      // Find dates of the first event
+      const targetedEventUpdated = targetedEvent.map((event) => {
+        const eventStartsAt = JSON.stringify(
+          addDays(parseISO(firstEvent.startsAt), toDay),
+        );
 
-    // Find dates of the first event
-    const targetedEventUpdated = targetedEvent.map((event) => {
-      const eventStartsAt = JSON.stringify(
-        addDays(parseISO(firstEvent.startsAt), toDay),
+        const eventEndsAt = JSON.stringify(
+          addDays(parseISO(firstEvent.endsAt), toDay),
+        );
+
+        return {
+          ...event,
+          startsAt: eventStartsAt.replace(/[ "]/g, ''),
+          endsAt: eventEndsAt.replace(/[ "]/g, ''),
+        };
+      });
+
+      const eventsWithoutTheTargetedOne = eventsByDay[key].filter(
+        (event) => event.id !== id,
       );
-      const eventEndsAt = JSON.stringify(
-        addDays(parseISO(firstEvent.endsAt), toDay),
-      );
-      return {
-        ...event,
-        startsAt: eventStartsAt.replace(/[ "]/g, ''),
-        endsAt: eventEndsAt.replace(/[ "]/g, ''),
-      };
+
+      eventsByDay[key] = [...eventsWithoutTheTargetedOne];
+
+      if (eventsByDay[toDay]) {
+        const eventMovedToDay = removeUndefinedEvent(eventsByDay[toDay]);
+
+        if (eventMovedToDay !== []) {
+          const eventMovedToDayWithPreviousEvent = [
+            ...eventMovedToDay,
+            targetedEventUpdated[0],
+          ];
+
+          eventsByDay[toDay] = removeUndefinedEvent(
+            eventMovedToDayWithPreviousEvent,
+          );
+        }
+      } else {
+        eventsByDay[toDay] = [targetedEventUpdated[0]];
+      }
     });
-
-    if (eventsByDay[toDay]) {
-      eventsByDay[toDay] = [...eventsByDay[toDay], targetedEventUpdated[0]];
-    } else {
-      eventsByDay[toDay] = [targetedEventUpdated[0]];
-    }
-  });
-  return eventsByDay;
+    return eventsByDay;
+  } else {
+    return `Invalid input! Verify your inputs: eventsByDay must be an object, id and toDay must be numbers`;
+  }
 };
 
 moveEventToDay(groupEventsByDay(arrayOfEvents), 110, 9);
