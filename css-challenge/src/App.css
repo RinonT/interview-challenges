@@ -60,6 +60,7 @@ a {
 .date {
   font-size: 14px;
   line-height: 12px;
+  opacity: 0.7;
 }
 
 .notification_icon_container, .search_form, .search_input, .feeling_emojy_wrapper {
@@ -70,6 +71,7 @@ a {
 .notification_icon_container, .feeling_emojy_wrapper {
   padding: 16px; 
   padding-bottom: 14px;
+  cursor: pointer;
 }
  
 .notifications_icon {
@@ -77,16 +79,21 @@ a {
   margin-top: 1px;
 }
 
-.search_form {
-    padding-left: 16px;
-}
+/* .search_form {
+    background-image: url(../public/assets/searchIcon.png);
+} */
 
 .search_input {
   width: 100%;
   font-size: 14px;
   border: 1px solid rgb(82, 140, 192);
   padding: 16px;
+  padding-left: 44px;
   color: #ffffff;
+  background-image: url(../public/assets/searchIcon.png);
+  background-repeat: no-repeat;
+  background-position: 16px 17px;
+  background-size: 18px;
 }
 
 .search_input::placeholder, .search_input::-webkit-input-placeholder { 
@@ -100,8 +107,8 @@ a {
 }
 
 .feeling_lists_container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     column-gap: 12px; 
     padding-bottom: 32px;
 }
@@ -114,15 +121,24 @@ a {
     text-align: center;
 }
 
+/* When the feeling emojies are in two rows, this adds a spaces between the two*/
+.feeling:first-of-type {
+  margin-bottom: 12px;
+} 
+
 .feeling_description {
     font-size: 14px;
 }
 
-.app_section.exercises_section {
+.exercises_section {
     background-color: #ffffff;
     border-radius: 25px;
     color: #333333;
     transform: translateY(-40px);
+    padding-bottom: 8px;
+    background-image: url(../public/assets/bar.png);
+    background-repeat: no-repeat;
+    background-position: center 8px;
 }
 
 .exercises_section_heading {
@@ -139,12 +155,13 @@ a {
     margin-bottom: 16px;
     padding: 16px;
     border-radius: 8px;
-    position: relative;
+    position: relative; 
+    cursor: pointer;
 }
 
-/* .exercise_wrapper_with_shadow {
+.exercise_wrapper_with_shadow {
   
-} */
+}
 
 .exercise_icon_container {
   margin-right: 16px;
@@ -190,6 +207,45 @@ a {
 .see_more_container {
   position: absolute;
   right: 16px;
+}
+
+.see_more {
+  font-size: 18px;
+  line-height: 16px;
+  color: #33333380;
+}
+
+.app_footer {
+  background-color: #ffffff;
+  padding: 32px 40px 0;
+  transform: translateY(-124px);
+  border-radius: 25px;
+}
+ 
+.navigation_menu_lists {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 21px;
+}
+
+.menu img {
+  max-width: 18px;
+}
+
+.active_menu {
+  background-image: url('../public/assets/home_active.png');
+  background-repeat: no-repeat;
+  background-position: 2px 45px; 
+  padding: 0 21px 32px 9px;
+}
+
+@media(min-width: 450px) {
+  .feeling_lists_container { 
+    grid-template-columns: repeat(4, 1fr);
+ }
+ .feeling:first-of-type {
+   margin-bottom: 0;
+ }
 }
 
 @media(min-width: 1114px) {
