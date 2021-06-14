@@ -11,13 +11,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
+.app {
+  max-width: 500px;
   background-color: rgb(229, 233, 244);
   padding: 40px;
 }
 
-.Container {
-  align-items: center;
+.container { 
   background-color: rgb(62, 126, 184);
   border-radius: 25px;
   color: white;
@@ -25,4 +25,176 @@ body {
   flex-direction: column;
   font-weight: bold;
   padding: 40px;
+}
+h1, h2, h3 {
+  margin: 0;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.notification_container, .search_container {
+  margin-bottom: 40px;
+}
+
+.notification_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.greeting {
+  font-size: 24px;
+  line-height: 24px;
+  margin-bottom: 8px;
+}
+
+.date {
+  font-size: 14px;
+  line-height: 12px;
+}
+
+.notification_icon_container, .search_form, .search_input, .feeling_emojy_wrapper {
+    background-color: rgb(82, 140, 192);
+    border-radius: 11px;
+}
+
+.notification_icon_container, .feeling_emojy_wrapper {
+  padding: 16px; 
+  padding-bottom: 14px;
+}
+ 
+.notifications_icon {
+  max-width: 18px;
+  margin-top: 1px;
+}
+
+.search_form {
+    padding-left: 16px;
+}
+
+.search_input {
+  width: 100%;
+  font-size: 14px;
+  border: 1px solid rgb(82, 140, 192);
+  padding: 16px;
+  color: #ffffff;
+}
+
+.search_input::placeholder, .search_input::-webkit-input-placeholder { 
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.feelings_heading, .exercises_section_title {
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+
+.feeling_lists_container {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 12px; 
+    padding-bottom: 32px;
+}
+
+.feeling_emoji {
+    max-width: 24px;
+}
+
+.feeling {
+    text-align: center;
+}
+
+.feeling_description {
+    font-size: 14px;
+}
+
+.app_section.exercises_section {
+    background-color: #ffffff;
+    border-radius: 25px;
+    color: #333333;
+    transform: translateY(-40px);
+}
+
+.exercises_section_heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.exercises_section_title, .exercise_name {
+ opacity: 0.8;
+}
+
+.exercise_wrapper {
+    display: flex; 
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* .exercise_wrapper_with_shadow {
+  
+} */
+
+.exercise_icon_container {
+  margin-right: 16px;
+  padding: 16px;
+  padding-bottom: 14px;
+  border-radius: 11px;
+}
+
+.exercise_wrapper_bordered {
+   border: 1.5px solid lightgray;
+}
+ 
+.heart_icon_container {
+   background-color: rgb(226, 138, 96);
+   padding-bottom: 14px; 
+}
+
+.reader_icon_container {
+ background-color: rgb(82, 140, 192);
+}
+
+.hidden_icon_container {
+  background-color: rgb(232, 102, 127);
+}
+
+.hidden_exercise_wrapper {
+  border: 1px solid lightgray;
+}
+
+.exercise_name {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.exercise_numbers {
+    color: #33333380;
+}
+
+.exercise_wrapper img{
+  max-width: 18px;
+}
+
+.see_more_container {
+  position: absolute;
+  right: 16px;
+}
+
+@media(min-width: 1114px) {
+ .app {
+   margin-left: auto;
+   margin-right: auto;
+ }
 }
