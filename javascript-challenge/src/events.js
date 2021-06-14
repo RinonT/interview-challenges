@@ -45,16 +45,6 @@ const arrayOfEvents = [
   },
 ];
 
-// Sorting the array of events
-
-const sortArrayOfEvents = (events) => {
-  return events.sort(
-    (firstEvent, secondEvent) =>
-      new Date(firstEvent.startsAt.toString()) -
-      new Date(secondEvent.startsAt.toString()),
-  );
-};
-
 /** 
   Take an array of events and return an object that is a  mapping from the 'day' to the events occuring on that day.
   The keys should be the day-difference to the earliest occuring event.
@@ -75,6 +65,16 @@ const sortArrayOfEvents = (events) => {
 
  Your solution should not modify any of the function arguments
 */
+
+// Sorting the array of events
+
+const sortArrayOfEvents = (events) => {
+  return events.sort(
+    (firstEvent, secondEvent) =>
+      new Date(firstEvent.startsAt.toString()) -
+      new Date(secondEvent.startsAt.toString()),
+  );
+};
 const groupEventsByDay = (events) => {
   const arrayOfEventsSorted = sortArrayOfEvents(events);
   const firstEventObj = arrayOfEventsSorted[0];
