@@ -75,6 +75,7 @@ const sortArrayOfEvents = (events) => {
       new Date(secondEvent.startsAt.toString()),
   );
 };
+
 const groupEventsByDay = (events) => {
   const arrayOfEventsSorted = sortArrayOfEvents(events);
   const firstEventObj = arrayOfEventsSorted[0];
