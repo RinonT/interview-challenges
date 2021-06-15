@@ -74,6 +74,12 @@ a {
   border-radius: 11px;
 }
 
+.notification_icon_container:hover,
+.feeling_emojy_wrapper:hover {
+  background-color: rgba(82, 141, 192, 0.561);
+  box-shadow: 2px 2px 2px 2px rgba(229, 233, 244, 0.322);
+}
+
 .notification_icon_container,
 .feeling_emojy_wrapper {
   padding: 16px;
@@ -86,10 +92,6 @@ a {
   margin-top: 1px;
 }
 
-/* .search_form {
-    background-image: url(../public/assets/searchIcon.png);
-} */
-
 .search_input {
   width: 100%;
   font-size: 14px;
@@ -101,12 +103,18 @@ a {
   background-repeat: no-repeat;
   background-position: 16px 17px;
   background-size: 18px;
+  outline: 2px;
 }
 
 .search_input::placeholder,
 .search_input::-webkit-input-placeholder {
   font-weight: bold;
   color: #ffffff;
+}
+
+.search_form:hover,
+.search_input:hover {
+  background-color: rgb(82, 124, 192);
 }
 
 .feelings_container_header {
