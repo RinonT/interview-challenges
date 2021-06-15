@@ -3,7 +3,7 @@ import ExerciseList from './ExerciseList';
 
 export default function ExercisesListContainer() {
   return (
-    <div class="exercises_container">
+    <div className="exercises_container">
       <ExerciseList
         wrapperClass={'exercise_wrapper_with_shadow'}
         iconClass={'heart_icon_container'}

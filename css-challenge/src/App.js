@@ -14,7 +14,7 @@ function App() {
         <SearchInput />
         <FeelingsContainer />
       </section>
-      <section class="container app_section exercises_section">
+      <section className="container app_section exercises_section">
         <ExercisesHeading />
         <ExercisesListContainer />
       </section>

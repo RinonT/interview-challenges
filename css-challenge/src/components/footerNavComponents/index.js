@@ -2,8 +2,8 @@ import React from 'react';
 
 export function NavigationList({ listClass, linkClass, imagePath }) {
   return (
-    <li class={`menu ${listClass}`}>
-      <a class={`${linkClass}`} href="#home">
+    <li className={`menu ${listClass}`}>
+      <a className={`${linkClass}`} href="#home">
         <img src={`${imagePath}`} alt="" />
       </a>
     </li>
@@ -12,9 +12,9 @@ export function NavigationList({ listClass, linkClass, imagePath }) {
 
 export default function AppNavigation() {
   return (
-    <footer class="app_footer">
-      <nav class="app_navigation_menu">
-        <ul class="navigation_menu_lists">
+    <footer className="app_footer">
+      <nav className="app_navigation_menu">
+        <ul className="navigation_menu_lists">
           <NavigationList
             listClass={'active_menu'}
             linkClass={'home_icon'}

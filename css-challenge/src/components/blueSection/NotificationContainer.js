@@ -2,14 +2,18 @@ import React from 'react';
 
 export default function NotificationContainer() {
   return (
-    <div class="notification_container">
-      <div class="greeting_container">
-        <h1 class="greeting">Hi, Jared!</h1>
-        <span class="date">23 Jan, 2021</span>
+    <div className="notification_container">
+      <div className="greeting_container">
+        <h1 className="greeting">Hi, Jared!</h1>
+        <span className="date">23 Jan, 2021</span>
       </div>
-      <div class="notification_icon_container">
-        <a class="notifications" href="#notifications">
-          <img class="notifications_icon" src="./assets/bell.svg" alt="" />
+      <div className="notification_icon_container">
+        <a className="notifications" href="#notifications">
+          <img
+            className="notifications_icon"
+            src="./assets/bell.svg"
+            alt="notification icon"
+          />
         </a>
       </div>
     </div>
