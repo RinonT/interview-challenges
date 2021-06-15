@@ -85,8 +85,6 @@ const groupEventsByDay = (events) => {
 
   // Add a difference property to each event
   const eventsArrayWithDifference = events.map((event) => {
-    const date = moment(event.startsAt);
-    const dateDifference = date.diff(momentOfFirstDate, 'days');
     return {
       ...event,
       difference: dateDifference,
@@ -95,6 +93,9 @@ const groupEventsByDay = (events) => {
 
   // Grouping events according to the day differences
   events = eventsArrayWithDifference.reduce(function (allEvents, event) {
+    const date = moment(event.startsAt);
+    const dateDifference = date.diff(momentOfFirstDate, 'days');
+
     allEvents[event.difference] = allEvents[event.difference] || [];
     allEvents[event.difference].push(event);
     return allEvents;
@@ -157,24 +158,17 @@ const moveEventToDay = (eventsByDay, id, toDay) => {
     typeof id === 'number' &&
     typeof toDay === 'number'
   ) {
-    Object.keys(eventsByDay).map((key) => {
-      let eventsFromKeys = eventsByDay[key];
+    const firstEvent = eventsByDay[0][0];
 
+    Object.keys(eventsByDay).map((key) => {
+      const eventsFromKeys = eventsByDay[key];
       const targetedEvent = eventsFromKeys.filter((event) => event.id === id);
 
-      let firstEvent = eventsByDay[0];
-      if (firstEvent.length > 0) {
-        firstEvent = firstEvent[firstEvent.length - 1];
-      } else {
-        firstEvent = firstEvent[0];
-      }
-
-      // Find dates of the first event
+      // Find dates of the targeted event
       const targetedEventUpdated = targetedEvent.map((event) => {
         const eventStartsAt = JSON.stringify(
           addDays(parseISO(firstEvent.startsAt), toDay),
         );
-
         const eventEndsAt = JSON.stringify(
           addDays(parseISO(firstEvent.endsAt), toDay),
         );
@@ -189,7 +183,6 @@ const moveEventToDay = (eventsByDay, id, toDay) => {
       const eventsWithoutTheTargetedOne = eventsByDay[key].filter(
         (event) => event.id !== id,
       );
-
       eventsByDay[key] = [...eventsWithoutTheTargetedOne];
 
       if (eventsByDay[toDay]) {

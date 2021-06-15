@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   background-color: rgb(229, 233, 244);
   margin: 0;
@@ -11,7 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app {
+.App {
   max-width: 500px;
   background-color: rgb(229, 233, 244);
   padding: 40px;
@@ -26,6 +27,7 @@ body {
   font-weight: bold;
   padding: 40px;
 }
+
 h1,
 h2,
 h3 {
@@ -99,7 +101,7 @@ a {
   padding: 16px;
   padding-left: 44px;
   color: #ffffff;
-  background-image: url(../public/assets/search_icon.png);
+  background-image: url(./bgImages/search_icon.png);
   background-repeat: no-repeat;
   background-position: 16px 17px;
   background-size: 18px;
@@ -168,7 +170,7 @@ a {
   color: #333333;
   transform: translateY(-40px);
   padding-bottom: 8px;
-  background-image: url(../public/assets/bar.png);
+  background-image: url(./bgImages/bar.png);
   background-repeat: no-repeat;
   background-position: center 8px;
 }
@@ -264,7 +266,7 @@ a {
 }
 
 .active_menu {
-  background-image: url('../public/assets/home_active.png');
+  background-image: url('./bgImages/home_active.png');
   background-repeat: no-repeat;
   background-position: 2px 45px;
   padding: 0 21px 32px 9px;
@@ -280,7 +282,7 @@ a {
 }
 
 @media (min-width: 1114px) {
-  .app {
+  .App {
     margin-left: auto;
     margin-right: auto;
   }
