@@ -17,7 +17,7 @@ body {
   padding: 40px;
 }
 
-.container { 
+.container {
   background-color: rgb(62, 126, 184);
   border-radius: 25px;
   color: white;
@@ -26,7 +26,9 @@ body {
   font-weight: bold;
   padding: 40px;
 }
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin: 0;
 }
 ul {
@@ -42,13 +44,14 @@ a {
   text-decoration: none;
 }
 
-.notification_container, .search_container {
+.notification_container,
+.search_container {
   margin-bottom: 40px;
 }
 
 .notification_container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .greeting {
@@ -63,17 +66,21 @@ a {
   opacity: 0.7;
 }
 
-.notification_icon_container, .search_form, .search_input, .feeling_emojy_wrapper {
-    background-color: rgb(82, 140, 192);
-    border-radius: 11px;
+.notification_icon_container,
+.search_form,
+.search_input,
+.feeling_emojy_wrapper {
+  background-color: rgb(82, 140, 192);
+  border-radius: 11px;
 }
 
-.notification_icon_container, .feeling_emojy_wrapper {
-  padding: 16px; 
+.notification_icon_container,
+.feeling_emojy_wrapper {
+  padding: 16px;
   padding-bottom: 14px;
   cursor: pointer;
 }
- 
+
 .notifications_icon {
   max-width: 18px;
   margin-top: 1px;
@@ -96,71 +103,89 @@ a {
   background-size: 18px;
 }
 
-.search_input::placeholder, .search_input::-webkit-input-placeholder { 
+.search_input::placeholder,
+.search_input::-webkit-input-placeholder {
   font-weight: bold;
   color: #ffffff;
 }
 
-.feelings_heading, .exercises_section_title {
-    font-size: 18px;
-    margin-bottom: 24px;
+.feelings_container_header {
+  display: flex;
+  justify-content: space-between;
+}
+.two_dotes {
+  font-size: 18px;
+  line-height: 16px;
+  font-size: 18px;
+  line-height: 16px;
+}
+
+.see_more_feelings_icon {
+  color: #ffffff;
+}
+
+.feelings_heading,
+.exercises_section_title {
+  font-size: 18px;
+  margin-bottom: 24px;
 }
 
 .feeling_lists_container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 12px; 
-    padding-bottom: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 12px;
+  padding-bottom: 32px;
 }
 
 .feeling_emoji {
-    max-width: 24px;
+  max-width: 24px;
 }
 
 .feeling {
-    text-align: center;
+  text-align: center;
 }
 
 /* When the feeling emojies are in two rows, this adds a spaces between the two*/
 .feeling:first-of-type {
   margin-bottom: 12px;
-} 
+}
 
 .feeling_description {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .exercises_section {
-    background-color: #ffffff;
-    border-radius: 25px;
-    color: #333333;
-    transform: translateY(-40px);
-    padding-bottom: 8px;
-    background-image: url(../public/assets/bar.png);
-    background-repeat: no-repeat;
-    background-position: center 8px;
+  background-color: #ffffff;
+  border-radius: 25px;
+  color: #333333;
+  transform: translateY(-40px);
+  padding-bottom: 8px;
+  background-image: url(../public/assets/bar.png);
+  background-repeat: no-repeat;
+  background-position: center 8px;
 }
 
 .exercises_section_heading {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
-.exercises_section_title, .exercise_name {
- opacity: 0.8;
+.exercises_section_title,
+.exercise_name {
+  opacity: 0.8;
 }
 
 .exercise_wrapper {
-    display: flex; 
-    margin-bottom: 16px;
-    padding: 16px;
-    border-radius: 8px;
-    position: relative; 
-    cursor: pointer;
+  display: flex;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
 }
 
 .exercise_wrapper_with_shadow {
-  
+  box-shadow: 19px 59px 22px rgb(229 233 244 / 80%);
 }
 
 .exercise_icon_container {
@@ -171,16 +196,16 @@ a {
 }
 
 .exercise_wrapper_bordered {
-   border: 1.5px solid lightgray;
+  border: 1.5px solid lightgray;
 }
- 
+
 .heart_icon_container {
-   background-color: rgb(226, 138, 96);
-   padding-bottom: 14px; 
+  background-color: rgb(226, 138, 96);
+  padding-bottom: 14px;
 }
 
 .reader_icon_container {
- background-color: rgb(82, 140, 192);
+  background-color: rgb(82, 140, 192);
 }
 
 .hidden_icon_container {
@@ -197,10 +222,10 @@ a {
 }
 
 .exercise_numbers {
-    color: #33333380;
+  color: #33333380;
 }
 
-.exercise_wrapper img{
+.exercise_wrapper img {
   max-width: 18px;
 }
 
@@ -210,8 +235,6 @@ a {
 }
 
 .see_more {
-  font-size: 18px;
-  line-height: 16px;
   color: #33333380;
 }
 
@@ -221,7 +244,7 @@ a {
   transform: translateY(-124px);
   border-radius: 25px;
 }
- 
+
 .navigation_menu_lists {
   display: flex;
   justify-content: space-between;
@@ -235,22 +258,22 @@ a {
 .active_menu {
   background-image: url('../public/assets/home_active.png');
   background-repeat: no-repeat;
-  background-position: 2px 45px; 
+  background-position: 2px 45px;
   padding: 0 21px 32px 9px;
 }
 
-@media(min-width: 450px) {
-  .feeling_lists_container { 
+@media (min-width: 450px) {
+  .feeling_lists_container {
     grid-template-columns: repeat(4, 1fr);
- }
- .feeling:first-of-type {
-   margin-bottom: 0;
- }
+  }
+  .feeling:first-of-type {
+    margin-bottom: 0;
+  }
 }
 
-@media(min-width: 1114px) {
- .app {
-   margin-left: auto;
-   margin-right: auto;
- }
+@media (min-width: 1114px) {
+  .app {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
