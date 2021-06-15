@@ -71,20 +71,20 @@ const arrayOfEvents = [
 const sortArrayOfEvents = (events) => {
   return events.sort(
     (firstEvent, secondEvent) =>
-      new Date(firstEvent.startsAt.toString()) -
-      new Date(secondEvent.startsAt.toString()),
+      new Date(firstEvent.startsAt) - new Date(secondEvent.startsAt),
   );
 };
 
 const groupEventsByDay = (events) => {
   const arrayOfEventsSorted = sortArrayOfEvents(events);
   const firstEventObj = arrayOfEventsSorted[0];
-
   // convert first date
   const momentOfFirstDate = moment(firstEventObj.startsAt);
 
   // Add a difference property to each event
   const eventsArrayWithDifference = events.map((event) => {
+    const date = moment(event.startsAt);
+    const dateDifference = date.diff(momentOfFirstDate, 'days');
     return {
       ...event,
       difference: dateDifference,
@@ -93,9 +93,6 @@ const groupEventsByDay = (events) => {
 
   // Grouping events according to the day differences
   events = eventsArrayWithDifference.reduce(function (allEvents, event) {
-    const date = moment(event.startsAt);
-    const dateDifference = date.diff(momentOfFirstDate, 'days');
-
     allEvents[event.difference] = allEvents[event.difference] || [];
     allEvents[event.difference].push(event);
     return allEvents;
@@ -112,10 +109,11 @@ const groupEventsByDay = (events) => {
       };
     });
   });
+
   return events;
 };
 
-// groupEventsByDay(arrayOfEvents);
+groupEventsByDay(arrayOfEvents);
 /** 
   Adjust the start and end date of an event so it maintains its total duration, but is moved `toDay`.
   `eventsByDay` should be the same as the return value of `groupEventsByDay`
@@ -213,3 +211,8 @@ const moveEventToDay = (eventsByDay, id, toDay) => {
 };
 
 moveEventToDay(groupEventsByDay(arrayOfEvents), 110, 9);
+module.exports = {
+  sortArrayOfEvents,
+  groupEventsByDay,
+  moveEventToDay,
+};
