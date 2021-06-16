@@ -1,60 +1,111 @@
 const events = require('./events');
+const { sortArrayOfEvents, groupEventsByDay, moveEventToDay } = events;
 
 const mockArrayOfEvents = [
   {
-    id: 115,
-    startsAt: '2021-01-27T11:01:11Z',
-    endsAt: '2021-01-29T15:01:11Z',
-    title: 'Cofference',
+    id: 106,
+    startsAt: '2021-01-27T13:01:11Z',
+    endsAt: '2021-01-27T15:01:11Z',
+    title: 'Daily walk',
   },
   {
-    id: 108,
-    startsAt: '2021-01-20T13:01:11Z',
-    endsAt: '2021-01-23T15:01:11Z',
-    title: 'Relaxing time',
+    id: 5676,
+    startsAt: '2021-01-29T13:01:11Z',
+    endsAt: '2021-01-27T15:01:11Z',
+    title: 'Daily walk',
+  },
+  {
+    id: 156,
+    startsAt: '2021-01-27T17:01:11Z',
+    endsAt: '2021-01-27T22:01:11Z',
+    title: 'Dinner',
   },
 ];
 
 const mockArrayOfEventsSorted = [
   {
-    id: 108,
-    startsAt: '2021-01-20T13:01:11Z',
-    endsAt: '2021-01-23T15:01:11Z',
-    title: 'Relaxing time',
+    id: 106,
+    startsAt: '2021-01-27T13:01:11Z',
+    endsAt: '2021-01-27T15:01:11Z',
+    title: 'Daily walk',
   },
   {
-    id: 115,
-    startsAt: '2021-01-27T11:01:11Z',
-    endsAt: '2021-01-29T15:01:11Z',
-    title: 'Cofference',
+    id: 156,
+    startsAt: '2021-01-27T17:01:11Z',
+    endsAt: '2021-01-27T22:01:11Z',
+    title: 'Dinner',
+  },
+  {
+    id: 5676,
+    startsAt: '2021-01-29T13:01:11Z',
+    endsAt: '2021-01-27T15:01:11Z',
+    title: 'Daily walk',
   },
 ];
 
 const eventsGroupedByDay = {
   0: [
     {
-      id: 108,
-      startsAt: '2021-01-20T13:01:11Z',
-      endsAt: '2021-01-23T15:01:11Z',
-      title: 'Relaxing time',
+      id: 106,
+      startsAt: '2021-01-27T13:01:11Z',
+      endsAt: '2021-01-27T15:01:11Z',
+      title: 'Daily walk',
+    },
+    {
+      id: 156,
+      startsAt: '2021-01-27T17:01:11Z',
+      endsAt: '2021-01-27T22:01:11Z',
+      title: 'Dinner',
     },
   ],
-  6: [
+  2: [
     {
-      id: 115,
-      startsAt: '2021-01-27T11:01:11Z',
-      endsAt: '2021-01-29T15:01:11Z',
-      title: 'Cofference',
+      id: 5676,
+      startsAt: '2021-01-29T13:01:11Z',
+      endsAt: '2021-01-27T15:01:11Z',
+      title: 'Daily walk',
     },
   ],
 };
 
-const { sortArrayOfEvents, groupEventsByDay, moveEventToDay } = events;
+const mockEventsByDayResult = {
+  0: [
+    {
+      id: 106,
+      startsAt: '2021-01-27T13:01:11Z',
+      endsAt: '2021-01-27T15:01:11Z',
+      title: 'Daily walk',
+    },
+    {
+      id: 156,
+      startsAt: '2021-01-27T17:01:11Z',
+      endsAt: '2021-01-27T22:01:11Z',
+      title: 'Dinner',
+    },
+  ],
+  2: [
+    {
+      id: 5676,
+      startsAt: '2021-01-29T13:01:11Z',
+      endsAt: '2021-01-27T15:01:11Z',
+      title: 'Daily walk',
+    },
+  ],
+};
 
 describe('test group eventsByday', () => {
   test('sort event by startsAt value', () => {
     const sortedEvents = sortArrayOfEvents(mockArrayOfEvents);
     expect(sortedEvents).toEqual(mockArrayOfEventsSorted);
+  });
+
+  test('sorts input events given in random order', () => {
+    expect(sortArrayOfEvents(mockArrayOfEvents)).toEqual(
+      mockArrayOfEventsSorted,
+    );
+  });
+  test('throws errors if missing an argument', () => {
+    expect(groupEventsByDay()).toBe('Invalid input');
   });
 
   test('does not accept when passed en empty array types', () => {
@@ -71,19 +122,47 @@ describe('test group eventsByday', () => {
     );
   });
 
-  test('the startsAAt date of the returned events must be "2021-01-20T13:01:11Z" and a string', () => {
+  test('check if the events provided in the example are working correctly', () => {
+    expect(groupEventsByDay(mockArrayOfEvents)).toStrictEqual(
+      mockEventsByDayResult,
+    );
+  });
+
+  test('the startsAAt date of the returned events is "2021-01-27T13:01:11Z" and a string', () => {
     const firstEvent = groupEventsByDay(mockArrayOfEvents)[0];
     const firstEventStartDate = firstEvent[0].startsAt;
     expect(typeof firstEventStartDate).toBe('string');
-    expect(firstEventStartDate).toEqual('2021-01-20T13:01:11Z');
+    expect(firstEventStartDate).toEqual('2021-01-27T13:01:11Z');
   });
 });
 
 describe('moveEvent', () => {
-  const mokeEventId = 115;
+  const mokeEventId = 106;
   const mokeToDay = 7;
   const eventsGroupedByDay = groupEventsByDay(mockArrayOfEvents);
-  const eventsMovedToDay = moveEventToDay(eventsGroupedByDay, 115, mokeToDay);
+  const eventsMovedToDay = moveEventToDay(
+    eventsGroupedByDay,
+    mokeEventId,
+    mokeToDay,
+  );
+
+  test('type of eventsByDay is object', () => {
+    expect(typeof mockEventsByDayResult).toBe('object');
+  });
+
+  test('throws an error if missing the groupByDay argument', () => {
+    expect(moveEventToDay(115, 9)).toBe('Missing one or more arguments');
+  });
+
+  test('throws an error if missing the id argument', () => {
+    expect(moveEventToDay(eventsGroupedByDay, 9)).toBe(
+      'Missing one or more arguments',
+    );
+  });
+
+  test('reject if there is no passed argument', () => {
+    expect(moveEventToDay()).toBe('Missing one or more arguments');
+  });
 
   test('rejects invalid parameters', () => {
     expect(moveEventToDay(eventsGroupedByDay, '115', mokeToDay)).toBe(
@@ -98,11 +177,11 @@ describe('moveEvent', () => {
   });
 
   test('gives the correct first event', () => {
-    const firstEvent = eventsGroupedByDay[0][0];
+    const firstEvent = mockEventsByDayResult[0][0];
     expect(firstEvent).toStrictEqual(mockArrayOfEventsSorted[0]);
   });
 
-  test('check if the passed id exists in the result of moved to day events', () => {
+  test('checks if the passed id exists in the result of moved to day events', () => {
     expect(eventsMovedToDay[mokeToDay][0].id).toBe(mokeEventId);
   });
 
