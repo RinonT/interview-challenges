@@ -49,24 +49,30 @@ const eventsGroupedByDay = {
   ],
 };
 
+const { sortArrayOfEvents, groupEventsByDay, moveEventToDay } = events;
+
 describe('test group eventsByday', () => {
   test('sort event by startsAt value', () => {
-    const sortedEvents = events.sortArrayOfEvents(mockArrayOfEvents);
+    const sortedEvents = sortArrayOfEvents(mockArrayOfEvents);
     expect(sortedEvents).toEqual(mockArrayOfEventsSorted);
   });
 
-  test('throws an errow when passed en empty array types', () => {
-    expect(typeof mockArrayOfEvents).not.toBe([]);
+  test('does not accept when passed en empty array types', () => {
+    expect(mockArrayOfEvents).not.toBe([]);
+  });
+
+  test('throw an error when the input data type is not an type of array', () => {
+    expect(groupEventsByDay(5)).toBe('Invalid input');
   });
 
   test('check if the events that is being returned is correct', () => {
-    expect(events.groupEventsByDay(mockArrayOfEvents)).toStrictEqual(
+    expect(groupEventsByDay(mockArrayOfEvents)).toStrictEqual(
       eventsGroupedByDay,
     );
   });
 
   test('the startsAAt date of the returned events must be "2021-01-20T13:01:11Z" and a string', () => {
-    const firstEvent = events.groupEventsByDay(mockArrayOfEvents)[0];
+    const firstEvent = groupEventsByDay(mockArrayOfEvents)[0];
     const firstEventStartDate = firstEvent[0].startsAt;
     expect(typeof firstEventStartDate).toBe('string');
     expect(firstEventStartDate).toEqual('2021-01-20T13:01:11Z');
@@ -76,21 +82,17 @@ describe('test group eventsByday', () => {
 describe('moveEvent', () => {
   const mokeEventId = 115;
   const mokeToDay = 7;
-  const eventsGroupedByDay = events.groupEventsByDay(mockArrayOfEvents);
-  const eventsMovedToDay = events.moveEventToDay(
-    eventsGroupedByDay,
-    115,
-    mokeToDay,
-  );
+  const eventsGroupedByDay = groupEventsByDay(mockArrayOfEvents);
+  const eventsMovedToDay = moveEventToDay(eventsGroupedByDay, 115, mokeToDay);
 
   test('rejects invalid parameters', () => {
-    expect(events.moveEventToDay(eventsGroupedByDay, '115', mokeToDay)).toBe(
+    expect(moveEventToDay(eventsGroupedByDay, '115', mokeToDay)).toBe(
       'Invalid input! Verify your inputs: eventsByDay must be an object, id and toDay must be numbers and positive',
     );
   });
 
   test('rejects a negative id or toDay value', () => {
-    expect(events.moveEventToDay(eventsGroupedByDay, mokeEventId, -7)).toBe(
+    expect(moveEventToDay(eventsGroupedByDay, mokeEventId, -7)).toBe(
       'Invalid input! Verify your inputs: eventsByDay must be an object, id and toDay must be numbers and positive',
     );
   });
@@ -105,8 +107,8 @@ describe('moveEvent', () => {
   });
 
   test('moveEventToDay returns the right value', () => {
-    expect(
-      events.moveEventToDay(eventsGroupedByDay, 115, mokeToDay),
-    ).toStrictEqual(eventsMovedToDay);
+    expect(moveEventToDay(eventsGroupedByDay, 115, mokeToDay)).toStrictEqual(
+      eventsMovedToDay,
+    );
   });
 });
