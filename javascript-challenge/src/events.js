@@ -154,7 +154,9 @@ const moveEventToDay = (eventsByDay, id, toDay) => {
   if (
     typeof eventsByDay === 'object' &&
     typeof id === 'number' &&
-    typeof toDay === 'number'
+    id >= 0 &&
+    typeof toDay === 'number' &&
+    toDay >= 0
   ) {
     const firstEvent = eventsByDay[0][0];
 
@@ -206,11 +208,12 @@ const moveEventToDay = (eventsByDay, id, toDay) => {
     });
     return eventsByDay;
   } else {
-    return `Invalid input! Verify your inputs: eventsByDay must be an object, id and toDay must be numbers`;
+    return `Invalid input! Verify your inputs: eventsByDay must be an object, id and toDay must be numbers and positive`;
   }
 };
 
 moveEventToDay(groupEventsByDay(arrayOfEvents), 110, 9);
+
 module.exports = {
   sortArrayOfEvents,
   groupEventsByDay,
