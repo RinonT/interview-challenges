@@ -93,13 +93,13 @@ const mockEventsByDayResult = {
   ],
 };
 
-describe('test group eventsByday', () => {
-  test('sort event by startsAt value', () => {
+describe('test groupEventsByday function', () => {
+  test('sorting events by startsAt value works correctly', () => {
     const sortedEvents = sortArrayOfEvents(mockArrayOfEvents);
     expect(sortedEvents).toEqual(mockArrayOfEventsSorted);
   });
 
-  test('sorts input events given in random order', () => {
+  test('sorts input events that is given in a random order', () => {
     expect(sortArrayOfEvents(mockArrayOfEvents)).toEqual(
       mockArrayOfEventsSorted,
     );
@@ -108,27 +108,27 @@ describe('test group eventsByday', () => {
     expect(groupEventsByDay()).toBe('Invalid input');
   });
 
-  test('does not accept when passed en empty array types', () => {
+  test('does not accept when passed en empty array', () => {
     expect(mockArrayOfEvents).not.toBe([]);
   });
 
-  test('throw an error when the input data type is not an type of array', () => {
+  test('throws an error when the input data type is not the type of array', () => {
     expect(groupEventsByDay(5)).toBe('Invalid input');
   });
 
-  test('check if the events that is being returned is correct', () => {
+  test('checks if the events that is being returned is correct', () => {
     expect(groupEventsByDay(mockArrayOfEvents)).toStrictEqual(
       eventsGroupedByDay,
     );
   });
 
-  test('check if the events provided in the example are working correctly', () => {
+  test('checks if the events provided in the example are working correctly', () => {
     expect(groupEventsByDay(mockArrayOfEvents)).toStrictEqual(
       mockEventsByDayResult,
     );
   });
 
-  test('the startsAAt date of the returned events is "2021-01-27T13:01:11Z" and a string', () => {
+  test('the startsAt date of the returned events is "2021-01-27T13:01:11Z" and a string', () => {
     const firstEvent = groupEventsByDay(mockArrayOfEvents)[0];
     const firstEventStartDate = firstEvent[0].startsAt;
     expect(typeof firstEventStartDate).toBe('string');
@@ -160,7 +160,7 @@ describe('moveEvent', () => {
     );
   });
 
-  test('reject if there is no passed argument', () => {
+  test('rejects if there is no passed argument', () => {
     expect(moveEventToDay()).toBe('Missing one or more arguments');
   });
 
